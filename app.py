@@ -22,3 +22,25 @@ def NameNationality():
     nationalities = nameObject.requestFullName()
     
     return nationalities,200
+
+@app.route("/api/partialname",methods = ["GET"])
+def PartialNameLocation():
+    args = request.args
+
+    if "name" in args:
+        name = args["name"]
+
+    if "type" in args:
+        typeName = args.get("type")
+
+    if name == "" or typeName == "":
+        return "You miss name or type",400
+    
+    if(typeName == "forename"):
+        nameObject = NamesApi(firstName= name,lastName="")
+    if(typeName == "surname"):
+        nameObject = NamesApi(firstName="",lastName=name)
+
+    locations = nameObject.requestPartialName(typeName)
+    
+    return locations,200
