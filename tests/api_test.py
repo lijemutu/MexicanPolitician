@@ -14,6 +14,14 @@ class TestSuite(unittest.TestCase):
         secondLastName = "Obrador"
 
         nationality = NamesApi(name,lastName,secondLastName=secondLastName)
-        jsonResponse = nationality.request()
+        jsonResponse = nationality.requestFullName()
 
         self.assertNotEqual(jsonResponse,{})
+
+    def test_NamesApiPartial(self):
+        name = "Andres"
+        nationality = NamesApi(name)
+        jsonResponse = nationality.requestPartialName("forename")
+
+        self.assertNotEqual(jsonResponse,{})
+

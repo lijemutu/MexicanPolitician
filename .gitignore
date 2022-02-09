@@ -1,1 +1,5 @@
 .env
+
+APIs/__pycache__/Api.cpython-38.pyc
+APIs/__pycache__/names_api.cpython-38.pyc
+tests/__pycache__/api_test.cpython-38.pyc

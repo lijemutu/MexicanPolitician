@@ -19,6 +19,6 @@ def NameNationality():
     if firstName == "" or lastName == "":
         return "You miss firstName or lastName",400
     nameObject = NamesApi(firstName,lastName,secondLastName=secondLastName)
-    nationalities = nameObject.request()
+    nationalities = nameObject.requestFullName()
     
     return nationalities,200
