@@ -20,6 +20,7 @@ def NameNationality():
         return "You miss firstName or lastName",400
     nameObject = NamesApi(firstName,lastName,secondLastName=secondLastName)
     nationalities = nameObject.requestFullName()
+    #TODO paging and formatting results
     
     return nationalities,200
 
@@ -43,4 +44,5 @@ def PartialNameLocation():
 
     locations = nameObject.requestPartialName(typeName)
     
+    #TODO paging and formatting results
     return locations,200
