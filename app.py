@@ -4,6 +4,10 @@ from APIs.names_api import NamesApi
 
 app = Flask(__name__)
 
+from db.tablesName import db
+
+db.init_app(app)
+
 @app.route("/api/name",methods = ["GET"])
 def NameNationality():
     args = request.args
