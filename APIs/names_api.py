@@ -51,8 +51,8 @@ class NamesApi(Api):
         name = data['name']
         type = data['type']
         countries = data['countries']
-        fullNameModel = FullNameModel.PartialNameModel(name=name,typeName=type,foundCountry1=countries[0]['jurisdiction'],foundCountry1percent=float(countries[0]['incidence']),foundCountry2=countries[1]['jurisdiction'],foundCountry2percent=float(countries[1]['incidence']),foundCountry3=countries[2]['jurisdiction'],foundCountry3percent=float(countries[2]['incidence']),foundCountry4=countries[3]['jurisdiction'],foundCountry4percent=float(countries[3]['incidence']),foundCountry5=countries[4]['jurisdiction'],foundCountry5percent=float(countries[4]['incidence']))
-        db.session.add(fullNameModel)
+        partialNameModel = FullNameModel.PartialNameModel(name=name,typeName=type,foundCountry1=countries[0]['jurisdiction'],foundCountry1percent=float(countries[0]['incidence']),foundCountry2=countries[1]['jurisdiction'],foundCountry2percent=float(countries[1]['incidence']),foundCountry3=countries[2]['jurisdiction'],foundCountry3percent=float(countries[2]['incidence']),foundCountry4=countries[3]['jurisdiction'],foundCountry4percent=float(countries[3]['incidence']),foundCountry5=countries[4]['jurisdiction'],foundCountry5percent=float(countries[4]['incidence']))
+        db.session.add(partialNameModel)
         db.session.commit()
 
     def saveResponseFullNameToDatabase(self,data):
