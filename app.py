@@ -1,12 +1,14 @@
 from flask import Flask, request
-
 from APIs.names_api import NamesApi
+from database.dbinit import db
 
 app = Flask(__name__)
 
-from db.tablesName import db
-
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@postgres:5432/mex_polit_db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
+with app.app_context():
+    db.create_all()
 
 @app.route("/api/name",methods = ["GET"])
 def NameNationality():
@@ -24,7 +26,6 @@ def NameNationality():
         return "You miss firstName or lastName",400
     nameObject = NamesApi(firstName,lastName,secondLastName=secondLastName)
     nationalities = nameObject.requestFullName()
-    #TODO paging and formatting results
     
     return nationalities,200
 
@@ -48,5 +49,7 @@ def PartialNameLocation():
 
     locations = nameObject.requestPartialName(typeName)
     
-    #TODO paging and formatting results
     return locations,200
+
+if __name__ == "__main__":  
+    app.run()

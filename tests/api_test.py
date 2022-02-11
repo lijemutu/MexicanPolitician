@@ -1,8 +1,4 @@
-from ast import Assert
 import unittest
-
-from itsdangerous import json
-
 from APIs.names_api import NamesApi
 
 class TestSuite(unittest.TestCase):

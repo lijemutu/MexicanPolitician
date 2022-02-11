@@ -1,13 +1,5 @@
-from pickle import FALSE
-from unicodedata import name
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 import datetime
-
-
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost:5432/mex_polit_db'
-db = SQLAlchemy(app)
+from database.dbinit import db
 
 class FullNameModel(db.Model):
     __tablename__ = 'fullnamestb'
@@ -28,11 +20,10 @@ class FullNameModel(db.Model):
     foundCountry5 = db.Column(db.String(128),nullable=True)
     foundCountry5percent = db.Column(db.Float,nullable=True)
 
-    def __init__(self,id
+    def __init__(self
                 ,firstName
                 ,lastName
                 ,secondLastName
-                ,created_at
                 ,foundCountry1
                 ,foundCountry1percent
                 ,foundCountry2
@@ -43,11 +34,10 @@ class FullNameModel(db.Model):
                 ,foundCountry4percent
                 ,foundCountry5
                 ,foundCountry5percent):
-        self.id = id
         self.firstName = firstName
         self.lastName = lastName
         self.secondLastName = secondLastName
-        self.created_at = created_at
+        self.created_at = datetime.datetime.utcnow()
         self.foundCountry1 = foundCountry1
         self.foundCountry1percent = foundCountry1percent
         self.foundCountry2 = foundCountry2
@@ -76,10 +66,9 @@ class FullNameModel(db.Model):
         foundCountry5 = db.Column(db.String(128),nullable=True)
         foundCountry5percent = db.Column(db.Float,nullable=True)
         
-        def __init__(self,id
+        def __init__(self
                 ,name
                 ,typeName
-                ,created_at
                 ,foundCountry1
                 ,foundCountry1percent
                 ,foundCountry2
@@ -90,10 +79,9 @@ class FullNameModel(db.Model):
                 ,foundCountry4percent
                 ,foundCountry5
                 ,foundCountry5percent):
-            self.id = id
             self.name = name
             self.typeName = typeName
-            self.created_at = created_at
+            self.created_at = datetime.datetime.utcnow()
             self.foundCountry1 = foundCountry1
             self.foundCountry1percent = foundCountry1percent
             self.foundCountry2 = foundCountry2
@@ -105,5 +93,3 @@ class FullNameModel(db.Model):
             self.foundCountry5 = foundCountry5
             self.foundCountry5percent = foundCountry5percent
 
-
-db.create_all()
