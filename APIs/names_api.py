@@ -51,7 +51,7 @@ class NamesApi(Api):
         name = data['name']
         type = data['type']
         countries = data['countries']
-        partialNameModel = FullNameModel.PartialNameModel(name=name,typeName=type,foundCountry1=countries[0]['jurisdiction'],foundCountry1percent=float(countries[0]['incidence']),foundCountry2=countries[1]['jurisdiction'],foundCountry2percent=float(countries[1]['incidence']),foundCountry3=countries[2]['jurisdiction'],foundCountry3percent=float(countries[2]['incidence']),foundCountry4=countries[3]['jurisdiction'],foundCountry4percent=float(countries[3]['incidence']),foundCountry5=countries[4]['jurisdiction'],foundCountry5percent=float(countries[4]['incidence']))
+        partialNameModel = FullNameModel.PartialNameModel(name=name,typeName=type,countries=countries)
         db.session.add(partialNameModel)
         db.session.commit()
 
@@ -60,7 +60,7 @@ class NamesApi(Api):
         surname = data['surname']
         secondSurname = data['secondSurname']
         countries= data['countries']
-        fullNameModel = FullNameModel(firstName=forename,lastName=surname,secondLastName=secondSurname,foundCountry1=countries[0]['jurisdiction'],foundCountry1percent=float(countries[0]['percent']),foundCountry2=countries[1]['jurisdiction'],foundCountry2percent=float(countries[1]['percent']),foundCountry3=countries[2]['jurisdiction'],foundCountry3percent=float(countries[2]['percent']),foundCountry4=countries[3]['jurisdiction'],foundCountry4percent=float(countries[3]['percent']),foundCountry5=countries[4]['jurisdiction'],foundCountry5percent=float(countries[4]['percent']))
+        fullNameModel = FullNameModel(firstName=forename,lastName=surname,secondLastName=secondSurname,countries=countries)
         db.session.add(fullNameModel)
         db.session.commit()
 

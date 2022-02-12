@@ -24,30 +24,57 @@ class FullNameModel(db.Model):
                 ,firstName
                 ,lastName
                 ,secondLastName
-                ,foundCountry1
-                ,foundCountry1percent
-                ,foundCountry2
-                ,foundCountry2percent
-                ,foundCountry3
-                ,foundCountry3percent
-                ,foundCountry4
-                ,foundCountry4percent
-                ,foundCountry5
-                ,foundCountry5percent):
+                ,countries:list):
         self.firstName = firstName
         self.lastName = lastName
         self.secondLastName = secondLastName
         self.created_at = datetime.datetime.utcnow()
-        self.foundCountry1 = foundCountry1
-        self.foundCountry1percent = foundCountry1percent
-        self.foundCountry2 = foundCountry2
-        self.foundCountry2percent = foundCountry2percent
-        self.foundCountry3 = foundCountry3
-        self.foundCountry3percent = foundCountry3percent
-        self.foundCountry4 = foundCountry4
-        self.foundCountry4percent = foundCountry4percent
-        self.foundCountry5 = foundCountry5
-        self.foundCountry5percent = foundCountry5percent
+
+        try:
+            self.foundCountry1 = countries[0]['jurisdiction'] 
+        except:
+            self.foundCountry1 = ""
+        try:
+            self.foundCountry1percent = float(countries[0]['incidence']) 
+        except:   
+            self.foundCountry1percent = 0
+
+        try:
+            self.foundCountry2 = countries[1]['jurisdiction'] 
+        except:
+            self.foundCountry2 = ""
+        try:
+            self.foundCountry2percent = float(countries[1]['incidence']) 
+        except:   
+            self.foundCountry2percent = 0
+
+        try:
+            self.foundCountry3 = countries[2]['jurisdiction'] 
+        except:
+            self.foundCountry3 = ""
+        try:
+            self.foundCountry3percent = float(countries[2]['incidence']) 
+        except:   
+            self.foundCountry3percent = 0
+
+        try:
+            self.foundCountry4 = countries[3]['jurisdiction'] 
+        except:
+            self.foundCountry4 = ""
+        try:
+            self.foundCountry4percent = float(countries[3]['incidence']) 
+        except:   
+            self.foundCountry4percent = 0
+
+        try:
+            self.foundCountry5 = countries[4]['jurisdiction'] 
+        except:
+            self.foundCountry5 = ""
+        try:
+            self.foundCountry5percent = float(countries[4]['incidence']) 
+        except:   
+            self.foundCountry5percent = 0
+
 
     class PartialNameModel(db.Model):
         __tablename__ = "partialnamestb"
@@ -69,27 +96,53 @@ class FullNameModel(db.Model):
         def __init__(self
                 ,name
                 ,typeName
-                ,foundCountry1
-                ,foundCountry1percent
-                ,foundCountry2
-                ,foundCountry2percent
-                ,foundCountry3
-                ,foundCountry3percent
-                ,foundCountry4
-                ,foundCountry4percent
-                ,foundCountry5
-                ,foundCountry5percent):
+                ,countries:list
+        ):
             self.name = name
             self.typeName = typeName
             self.created_at = datetime.datetime.utcnow()
-            self.foundCountry1 = foundCountry1
-            self.foundCountry1percent = foundCountry1percent
-            self.foundCountry2 = foundCountry2
-            self.foundCountry2percent = foundCountry2percent
-            self.foundCountry3 = foundCountry3
-            self.foundCountry3percent = foundCountry3percent
-            self.foundCountry4 = foundCountry4
-            self.foundCountry4percent = foundCountry4percent
-            self.foundCountry5 = foundCountry5
-            self.foundCountry5percent = foundCountry5percent
+            
+            try:
+                self.foundCountry1 = countries[0]['jurisdiction'] 
+            except:
+                self.foundCountry1 = ""
+            try:
+                self.foundCountry1percent = float(countries[0]['incidence']) 
+            except:   
+                self.foundCountry1percent = 0
 
+            try:
+                self.foundCountry2 = countries[1]['jurisdiction'] 
+            except:
+                self.foundCountry2 = ""
+            try:
+                self.foundCountry2percent = float(countries[1]['incidence']) 
+            except:   
+                self.foundCountry2percent = 0
+
+            try:
+                self.foundCountry3 = countries[2]['jurisdiction'] 
+            except:
+                self.foundCountry3 = ""
+            try:
+                self.foundCountry3percent = float(countries[2]['incidence']) 
+            except:   
+                self.foundCountry3percent = 0
+
+            try:
+                self.foundCountry4 = countries[3]['jurisdiction'] 
+            except:
+                self.foundCountry4 = ""
+            try:
+                self.foundCountry4percent = float(countries[3]['incidence']) 
+            except:   
+                self.foundCountry4percent = 0
+
+            try:
+                self.foundCountry5 = countries[4]['jurisdiction'] 
+            except:
+                self.foundCountry5 = ""
+            try:
+                self.foundCountry5percent = float(countries[4]['incidence']) 
+            except:   
+                self.foundCountry5percent = 0

@@ -1,10 +1,13 @@
+import os
 from flask import Flask, request
 from APIs.names_api import NamesApi
 from database.dbinit import db
 
-app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@postgres:5432/mex_polit_db'
+app = Flask(__name__)
+POSTGRES_HOST = os.getenv("POSTGRES_HOST","localhost") 
+
+app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://postgres:postgres@{POSTGRES_HOST}:5432/mex_polit_db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 with app.app_context():
