@@ -18,20 +18,32 @@ class NamesApi(Api):
         self.secondLastName = secondLastName
 
     def requestApiServer(self,url,type):
-        r = requests.get(url)
+        try:
+            r = requests.get(url)
+        except:
+            return {'error':500}
+
         if(r.status_code != 200):
             raise Exception(f"Request for {type} ... not valid")
         data = r.json()
 
+        apiErrors = ["0018"]
+        if('status' in data and data['status'][0]['code'] in apiErrors):
+            return {'error':400}
+
         if(type == "fullName"):
-            parsedData = {'forename':data['forename'],'surname':data['surname'],'secondSurname':data['secondSurname'],'countries':data['countries'][0:5]}
+            if 'secondSurname' in data:
+                parsedData = {'forename':data['forename'],'surname':data['surname'],'secondSurname':data['secondSurname'],'countries':data['countries'][0:5]}
+            else:
+                parsedData = {'forename':data['forename'],'surname':data['surname'],'countries':data['countries'][0:5]}
             self.saveResponseFullNameToDatabase(parsedData)
 
         else:
             parsedData = {'name':data['name'],'type':data['type'],'countries':data['jurisdictions'][0:5]}
             self.saveResponsePartialNameToDatabase(parsedData)
 
-        return parsedData        
+
+        return parsedData
     def requestFullName(self):
 
         ONO_API_FULL_NAME = f"https://ono.4b.rs/v1/nat?key={API_KEY_NAMES}&fn={self.firstName}&sn={self.lastName}&ssn={self.secondLastName}"
@@ -58,7 +70,10 @@ class NamesApi(Api):
     def saveResponseFullNameToDatabase(self,data):
         forename = data['forename']
         surname = data['surname']
-        secondSurname = data['secondSurname']
+        if 'secondSurname' in data:
+            secondSurname = data['secondSurname']
+        else:
+            secondSurname = ""
         countries= data['countries']
         fullNameModel = FullNameModel(firstName=forename,lastName=surname,secondLastName=secondSurname,countries=countries)
         db.session.add(fullNameModel)
