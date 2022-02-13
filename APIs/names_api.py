@@ -1,14 +1,11 @@
 import requests
 from APIs.Api import Api
-from dotenv import load_dotenv
 import os
 from database.tablesName import FullNameModel 
 from database.dbinit import db
-from flask_sqlalchemy import SQLAlchemy
 
 
 
-load_dotenv()
 API_KEY_NAMES = os.environ.get('API_KEY_NAMES')
 
 class NamesApi(Api):
