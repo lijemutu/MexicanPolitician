@@ -9,7 +9,7 @@ services:
       - "5000:5000"
     volumes:
       - ./:/app
-    environment:
+    environment: # TODO secrets
       - FLASK_APP=app.py
       - POSTGRES_HOST=postgres
       - API_KEY_NAMES=900670bcbd8a496c9bdda4c19670b110

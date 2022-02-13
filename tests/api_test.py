@@ -2,7 +2,7 @@ import unittest
 from APIs.names_api import NamesApi
 
 class TestSuite(unittest.TestCase):
-
+    # TODO Add mock database to run unit tests
     def test_NamesApi(self):
         # Código que se quiere probar
         name = "Andres"

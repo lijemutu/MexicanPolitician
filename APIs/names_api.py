@@ -14,7 +14,7 @@ class NamesApi(Api):
         self.firstName = firstName
         self.lastName = lastName
         self.secondLastName = secondLastName
-
+    # TODO Refactor to another class
     def requestApiServer(self,url,type):
         try:
             r = requests.get(url)
@@ -65,6 +65,7 @@ class NamesApi(Api):
         ONO_API_PARTIAL = f"https://ono.4b.rs/v1/jur?key={API_KEY_NAMES}&name={name}&type={typeName}"
         return self.requestApiServer(ONO_API_PARTIAL,typeName)
     
+    # TODO Refactor to another class
     def saveResponsePartialNameToDatabase(self,data):
         name = data['name']
         type = data['type']
@@ -72,7 +73,7 @@ class NamesApi(Api):
         partialNameModel = FullNameModel.PartialNameModel(name=name,typeName=type,countries=countries)
         db.session.add(partialNameModel)
         db.session.commit()
-
+    # TODO Refactor to another class
     def saveResponseFullNameToDatabase(self,data):
         forename = data['forename']
         surname = data['surname']

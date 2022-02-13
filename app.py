@@ -13,6 +13,7 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
+# TODO Refactor controllers from initialization
 @app.route("/api/name",methods = ["GET"])
 def NameNationality():
     args = request.args
