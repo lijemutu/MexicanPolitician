@@ -31,7 +31,7 @@ class NamesApi(Api):
             raise Exception(f"Request for {type} ... not valid")
         data = r.json()
 
-        apiErrors = ["0018"]
+        apiErrors = ["0018", "0007"]
         if "status" in data and data["status"][0]["code"] in apiErrors:
             return {"error": 400}
 
