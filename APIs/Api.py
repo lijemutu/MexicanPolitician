@@ -1,2 +1,2 @@
 class Api:
-    def save(self):pass
+    def save(self): pass
