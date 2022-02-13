@@ -3,8 +3,9 @@ from APIs.Api import Api
 from dotenv import load_dotenv
 import os
 from database.tablesName import FullNameModel 
-from database.tablesName import FullNameModel
 from database.dbinit import db
+from flask_sqlalchemy import SQLAlchemy
+
 
 
 load_dotenv()
@@ -46,6 +47,10 @@ class NamesApi(Api):
         return parsedData
     def requestFullName(self):
 
+        foundUser:FullNameModel= FullNameModel.query.filter_by(firstName=self.firstName,lastName=self.lastName,secondLastName=self.secondLastName).first()
+        if(foundUser != None):
+            return {'forename':foundUser.firstName,'surname':foundUser.lastName,'countries':[{'jurisdiction':foundUser.foundCountry1,'percent':str(foundUser.foundCountry1percent)},{'jurisdiction':foundUser.foundCountry2,'percent':str(foundUser.foundCountry2percent)},{'jurisdiction':foundUser.foundCountry3,'percent':str(foundUser.foundCountry3percent)},{'jurisdiction':foundUser.foundCountry4,'percent':str(foundUser.foundCountry4percent)},{'jurisdiction':foundUser.foundCountry5,'percent':str(foundUser.foundCountry5percent)},]}
+
         ONO_API_FULL_NAME = f"https://ono.4b.rs/v1/nat?key={API_KEY_NAMES}&fn={self.firstName}&sn={self.lastName}&ssn={self.secondLastName}"
         return self.requestApiServer(ONO_API_FULL_NAME,"fullName")
         
@@ -55,9 +60,13 @@ class NamesApi(Api):
         if(typeName == "surname"):
             name = self.lastName
 
+        foundUser:FullNameModel.PartialNameModel = FullNameModel.PartialNameModel.query.filter_by(name=name,typeName=typeName).first()
+        if(foundUser != None):
+            return {'name':foundUser.name,'type':foundUser.typeName,'countries':[{'jurisdiction':foundUser.foundCountry1,'percent':str(foundUser.foundCountry1percent)},{'jurisdiction':foundUser.foundCountry2,'percent':str(foundUser.foundCountry2percent)},{'jurisdiction':foundUser.foundCountry3,'percent':str(foundUser.foundCountry3percent)},{'jurisdiction':foundUser.foundCountry4,'percent':str(foundUser.foundCountry4percent)},{'jurisdiction':foundUser.foundCountry5,'percent':str(foundUser.foundCountry5percent)},]}
+        
+
         ONO_API_PARTIAL = f"https://ono.4b.rs/v1/jur?key={API_KEY_NAMES}&name={name}&type={typeName}"
         return self.requestApiServer(ONO_API_PARTIAL,typeName)
-    
     
     def saveResponsePartialNameToDatabase(self,data):
         name = data['name']

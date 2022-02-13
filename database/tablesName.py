@@ -35,7 +35,7 @@ class FullNameModel(db.Model):
         except:
             self.foundCountry1 = ""
         try:
-            self.foundCountry1percent = float(countries[0]['incidence']) 
+            self.foundCountry1percent = float(countries[0]['percent']) 
         except:   
             self.foundCountry1percent = 0
 
@@ -44,7 +44,7 @@ class FullNameModel(db.Model):
         except:
             self.foundCountry2 = ""
         try:
-            self.foundCountry2percent = float(countries[1]['incidence']) 
+            self.foundCountry2percent = float(countries[1]['percent']) 
         except:   
             self.foundCountry2percent = 0
 
@@ -53,7 +53,7 @@ class FullNameModel(db.Model):
         except:
             self.foundCountry3 = ""
         try:
-            self.foundCountry3percent = float(countries[2]['incidence']) 
+            self.foundCountry3percent = float(countries[2]['percent']) 
         except:   
             self.foundCountry3percent = 0
 
@@ -62,7 +62,7 @@ class FullNameModel(db.Model):
         except:
             self.foundCountry4 = ""
         try:
-            self.foundCountry4percent = float(countries[3]['incidence']) 
+            self.foundCountry4percent = float(countries[3]['percent']) 
         except:   
             self.foundCountry4percent = 0
 
@@ -71,7 +71,7 @@ class FullNameModel(db.Model):
         except:
             self.foundCountry5 = ""
         try:
-            self.foundCountry5percent = float(countries[4]['incidence']) 
+            self.foundCountry5percent = float(countries[4]['percent']) 
         except:   
             self.foundCountry5percent = 0
 
